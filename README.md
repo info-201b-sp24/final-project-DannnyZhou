@@ -1,7 +1,7 @@
-# Title of Your Final Project Here 
+# Climate Chronicles: Decoding the Impact of Industrialization on Global Weather Patterns
 ## INFO 201 "Foundational Skills for Data Science"
 
-Authors: Your names here
+Authors: Lawrence Xu, Shilin Zhou, Vivivan Wu, Hai Guo
 
 
 For the Final Project -- Data Wrangling, add the following to this code repository:
