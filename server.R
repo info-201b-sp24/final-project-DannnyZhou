@@ -13,8 +13,8 @@ data <- read.csv(url, skip = 1, stringsAsFactors = FALSE) %>%
          Annual_Anomaly = as.numeric(Annual_Anomaly))
 
 # Define server logic required to generate and render outputs
-#chart1
 server <- function(input, output) {
+  # Chart 1: Bar chart
   output$tempPlot <- renderPlotly({
     filtered_data <- data %>%
       filter(Year >= input$yearRange[1] & Year <= input$yearRange[2])
@@ -26,8 +26,8 @@ server <- function(input, output) {
     } else {
       1
     }
-
-   p <- ggplot(filtered_data, aes(x = Year, y = Annual_Anomaly)) +
+    
+    p <- ggplot(filtered_data, aes(x = Year, y = Annual_Anomaly)) +
       geom_bar(stat = "identity", fill = "purple") +
       labs(title = "Global Temperature Anomalies Over Time",
            x = "Year",
@@ -38,7 +38,26 @@ server <- function(input, output) {
     ggplotly(p)
   })
   
+  # Chart 2: Pie chart
+  output$pieChart <- renderPlotly({
+    filtered_data <- data %>%
+      filter(Year >= input$yearRange[1] & Year <= input$yearRange[2]) %>%
+      filter(!is.na(Annual_Anomaly)) %>%
+      mutate(Year = factor(Year)) # Convert Year to factor for better labeling
+    
+    pie_chart <- ggplot(filtered_data, aes(x = "", y = Annual_Anomaly, fill = Year)) +
+      geom_bar(stat = "identity", width = 1) +
+      coord_polar(theta = "y") +
+      labs(title = "Global Temperature Anomalies Over Time",
+           x = "",
+           y = "") +
+      theme_minimal() +
+      theme(axis.text.x = element_blank(), # Remove x axis text
+            axis.ticks = element_blank(), # Remove axis ticks
+            panel.grid = element_blank()) # Remove grid lines
+    
+    ggplotly(pie_chart)
+  })
   
 }
-
 

@@ -35,7 +35,7 @@ ui <- dashboardPage(
                          tags$p("This analysis aims to aid in preparation and adaptation strategies by providing a robust analysis of how climate change affects extreme weather patterns and their subsequent impacts on our world."),
                          tags$h3("Main questions"),
                          tags$p("Question 1: How have global temperature anomalies evolved over the years, and what does this suggest about the pace and scale of global warming?"),
-                         tags$p("Question 2: "),
+                         tags$p("Question 2: How have global temperature anomalies changed over the past 140 years, and what does this suggest about the trend in global warming?"),
                          tags$p("Question 3: "),
                          tags$img(src="https://t3.ftcdn.net/jpg/03/50/31/58/240_F_350315847_eo74yoI3NoaV9NFVSHj5DItIxwh6VUG0.jpg", height = "200px", width = "350px")
                          )
@@ -56,9 +56,21 @@ ui <- dashboardPage(
                   )
                 )
               )),
-      tabItem(tabName = "chart 2",
+      tabItem(tabName = "chart2",
               fluidPage(
-                titlePanel("Chart 2"),
+                titlePanel("Chart 2: Global Temperature Anomalies Over Time"),
+                sidebarLayout(
+                  sidebarPanel(
+                    sliderInput("yearRange", "Select Year Range", min = 1880, max = 2020, value = c(1880, 2020),step = 1),
+                    hr(),
+                    h4("About this chart"),
+                    p("This chart answers the second question"),
+                    p("This chart shows that over the past 140 years, global temperature anomalies have exhibited a significant upward trend, particularly in recent decades. Early years display relatively small temperature anomalies, while the late 20th and early 21st centuries show a marked increase in these values. This indicates that the trend of global warming is accelerating, demonstrating the significant impact of human activities, such as greenhouse gas emissions, on the climate. Such data helps in understanding the long-term trend of global warming and its potential environmental and societal impacts, emphasizing the importance and urgency of addressing climate change.")
+                  ),
+                  mainPanel(
+                    plotlyOutput("pieChart")
+                  )
+                )
               )),
       tabItem(tabName = "Chart 3",
               fluidPage(
