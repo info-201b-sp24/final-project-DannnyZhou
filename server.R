@@ -13,8 +13,8 @@ data <- read.csv(url, skip = 1, stringsAsFactors = FALSE) %>%
          Annual_Anomaly = as.numeric(Annual_Anomaly))
 
 # Define server logic required to generate and render outputs
+#chart1
 server <- function(input, output) {
-  # Chart 1: Bar chart
   output$tempPlot <- renderPlotly({
     filtered_data <- data %>%
       filter(Year >= input$yearRange[1] & Year <= input$yearRange[2])
@@ -26,8 +26,8 @@ server <- function(input, output) {
     } else {
       1
     }
-    
-    p <- ggplot(filtered_data, aes(x = Year, y = Annual_Anomaly)) +
+
+   p <- ggplot(filtered_data, aes(x = Year, y = Annual_Anomaly)) +
       geom_bar(stat = "identity", fill = "purple") +
       labs(title = "Global Temperature Anomalies Over Time",
            x = "Year",
@@ -37,27 +37,38 @@ server <- function(input, output) {
     
     ggplotly(p)
   })
+#chart2
+  data_decadal <- data %>%
+    mutate(Decade = floor(Year / 10) *10) %>%
+    group_by(Decade) %>%
+    summarise(Total_Anomaly = sum(Annual_Anomaly, na.rm = TRUE)) %>%
+    arrange(Decade)%>%
+    mutate(Decade = as.factor(Decade))
   
-  # Chart 2: Pie chart
-  output$pieChart <- renderPlotly({
+  # Generate the dot plot based on the slider input
+  
+  output$dotPlot <- renderPlotly({
+    # Depending on the selected aggregation method, use the corresponding function
+    agg_func <- if (input$aggregationMethod == "sum") sum else mean
+    
+    # Prepare the data based on user selections
     filtered_data <- data %>%
-      filter(Year >= input$yearRange[1] & Year <= input$yearRange[2]) %>%
-      filter(!is.na(Annual_Anomaly)) %>%
-      mutate(Year = factor(Year)) # Convert Year to factor for better labeling
+      mutate(Decade = floor(Year / 10) * 10) %>%
+      group_by(Decade) %>%
+      summarise(Total_Anomaly = agg_func(Annual_Anomaly, na.rm = TRUE)) %>%
+      filter(Decade >= input$decadeRange[1] & Decade <= input$decadeRange[2]) %>%
+      arrange(Decade)
     
-    pie_chart <- ggplot(filtered_data, aes(x = "", y = Annual_Anomaly, fill = Year)) +
-      geom_bar(stat = "identity", width = 1) +
-      coord_polar(theta = "y") +
-      labs(title = "Global Temperature Anomalies Over Time",
-           x = "",
-           y = "") +
-      theme_minimal() +
-      theme(axis.text.x = element_blank(), # Remove x axis text
-            axis.ticks = element_blank(), # Remove axis ticks
-            panel.grid = element_blank()) # Remove grid lines
-    
-    ggplotly(pie_chart)
+    # Generate the dot plot using Plotly
+    plot_ly(data = filtered_data, x = ~Decade, y = ~Total_Anomaly,
+            type = 'scatter', mode = 'markers+lines',
+            marker = list(size = 10, color = 'blue')) %>%
+      layout(title = "Temperature Anomalies by Decade",
+             xaxis = list(title = "Decade"),
+             yaxis = list(title = "Total Anomaly"),
+             hovermode = 'closest')
   })
-  
+
 }
+
 

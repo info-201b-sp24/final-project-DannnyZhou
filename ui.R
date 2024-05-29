@@ -11,7 +11,7 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Introduction", tabName = "introduction", icon = icon("dashboard")),
       menuItem("Chart 1", tabName = "chart1", icon = icon("chart-line")),
-      menuItem("Chart 2", tabName = "chart 2", icon = icon("chart-pie")),
+      menuItem("Chart 2", tabName = "chart2", icon = icon("chart-line")),
       menuItem("Chart 3", tabName = "chart 3", icon = icon ("chart-line")),
       menuItem("Conclusion", tabName = "conclusion", icon = icon("file"))
     )
@@ -35,7 +35,7 @@ ui <- dashboardPage(
                          tags$p("This analysis aims to aid in preparation and adaptation strategies by providing a robust analysis of how climate change affects extreme weather patterns and their subsequent impacts on our world."),
                          tags$h3("Main questions"),
                          tags$p("Question 1: How have global temperature anomalies evolved over the years, and what does this suggest about the pace and scale of global warming?"),
-                         tags$p("Question 2: How have global temperature anomalies changed over the past 140 years, and what does this suggest about the trend in global warming?"),
+                         tags$p("Question 2: How do temperature anomalies compare across different decades, and what can these comparisons tell us about the trends in global warming and its acceleration over time?"),
                          tags$p("Question 3: "),
                          tags$img(src="https://t3.ftcdn.net/jpg/03/50/31/58/240_F_350315847_eo74yoI3NoaV9NFVSHj5DItIxwh6VUG0.jpg", height = "200px", width = "350px")
                          )
@@ -49,7 +49,7 @@ ui <- dashboardPage(
                     sliderInput("yearRange", "Select Year Range", min = 1880, max = 2020, value = c(1880, 2020),step = 1),
                   hr(),
                   h4("About this chart"),
-                  p("This chart answers the first question"),
+                  p("This chart answers the first question."),
                   p("This chart visualizes the annual global temperature anomalies to help understand how global temperatures have fluctuated over the years relative to a historical average. It aims to highlight trends in warming or cooling over different periods and can be used to infer potential causes of these anomalies such as industrial activities or natural events.")),
                   mainPanel(
                     plotlyOutput("tempPlot")
@@ -58,19 +58,30 @@ ui <- dashboardPage(
               )),
       tabItem(tabName = "chart2",
               fluidPage(
-                titlePanel("Chart 2: Global Temperature Anomalies Over Time"),
+                titlePanel("Chart 2: Climate Data Visualization - Dot Plot"),
                 sidebarLayout(
                   sidebarPanel(
-                    sliderInput("yearRange", "Select Year Range", min = 1880, max = 2020, value = c(1880, 2020),step = 1),
+                    helpText("Interactive visualization of temperature anomalies by decade."),
+                    sliderInput("decadeRange", "Select Decade Range:",
+                                min = 1880,  
+                                max = 2020, 
+                                value = c(1880, 2020),  
+                                step = 10, 
+                                ticks = TRUE),
+                    
+                    selectInput("aggregationMethod", "Choose Aggregation Method:",
+                                choices = list("Sum" = "sum", "Average" = "mean"),
+                                selected = "sum"),
                     hr(),
                     h4("About this chart"),
-                    p("This chart answers the second question"),
-                    p("This chart shows that over the past 140 years, global temperature anomalies have exhibited a significant upward trend, particularly in recent decades. Early years display relatively small temperature anomalies, while the late 20th and early 21st centuries show a marked increase in these values. This indicates that the trend of global warming is accelerating, demonstrating the significant impact of human activities, such as greenhouse gas emissions, on the climate. Such data helps in understanding the long-term trend of global warming and its potential environmental and societal impacts, emphasizing the importance and urgency of addressing climate change.")
-                  ),
-                  mainPanel(
-                    plotlyOutput("pieChart")
-                  )
-                )
+                    p("This chart answers the second question."),
+                    p("This dot plot visualizes global temperature anomalies by decade, highlighting the fluctuations and trends in climate change over time. Each dot represents the cumulative or average temperature anomaly for a decade, depending on user selection."),
+                    p("Users can adjust the time range and aggregation method to explore specific periods and observe how global temperatures have shifted. This visualization aims to provide a straightforward overview of historical climate patterns, aiding in the understanding of long-term climate trends.")
+                ),
+                mainPanel(
+                  plotlyOutput("dotPlot")
+                 )
+                )#tabsetPanel
               )),
       tabItem(tabName = "Chart 3",
               fluidPage(
