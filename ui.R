@@ -35,7 +35,7 @@ ui <- dashboardPage(
                          tags$h3("Main questions"),
                          tags$p("Question 1: How have global temperature anomalies evolved over the years, and what does this suggest about the pace and scale of global warming?"),
                          tags$p("Question 2: How do temperature anomalies compare across different decades, and what can these comparisons tell us about the trends in global warming and its acceleration over time?"),
-                         tags$p("Question 3: How do the annual average land temperature changes over the years, and what does this intigates about the trends of global warming?"),
+                         tags$p("Question 3: How do the annual average land temperature changes over the years, and what does this intigate about the trends of global warming?"),
                          tags$img(src="https://t3.ftcdn.net/jpg/03/50/31/58/240_F_350315847_eo74yoI3NoaV9NFVSHj5DItIxwh6VUG0.jpg", height = "200px", width = "350px")
                   )
                 )
