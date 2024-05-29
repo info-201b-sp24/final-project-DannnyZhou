@@ -1,7 +1,8 @@
 # Climate Chronicles: Decoding the Impact of Industrialization on Global Weather Patterns
 ## INFO 201 "Foundational Skills for Data Science"
 
-Authors: 
+Authors:
+
 Shilin Zhou: zhshilin\@uw.edu
 
 Lawrence Xu: longyx\@uw.edu
@@ -11,7 +12,7 @@ Hai Guo: hguo5\@uw.edu
 Vivian Wu: viviaw\@uw.edu
 
 **Link to Shiny App**
-http://127.0.0.1:6932/
+http://xulongyu0217.shinyapps.io/final-project-DannnyZhou
 
 # Introduction
 Climate change represents a serious global challenge, profoundly affecting every parts of Earth's climatic systems. As industrial activities have surged over the last century, so too have their impacts on global temperatures and precipitation patterns. Our research project is designed to futher analysis into these trends, focusing specifically on how changes in global temperatures and precipitation patterns have corresponded with the rise in industrial activities over the past century.
