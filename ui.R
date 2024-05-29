@@ -104,7 +104,7 @@ ui <- dashboardPage(
                 titlePanel("Conclusion"),
                 fluidRow(
                   column(12,
-                         tags$h3("Major Takeaways from the Project"),
+                         tags$h3("Major Takeaways"),
                          tags$p("1. The analysis of global temperature anomalies over time has revealed a consistent and alarming trend of global warming. This finding is crucial for technologists and researchers who can use this data to innovate solutions to mitigate the effects of climate change. For instance, developing more efficient renewable energy sources or advanced climate monitoring systems can help track and address these changes more effectively."),
                          tags$p("2. The comparison of temperature anomalies across different decades highlighted the accelerating pace of global warming. This insight is particularly relevant for policymakers. By understanding how quickly the climate is changing, they can establish targeted regulatory frameworks and climate policies. These policies might include stricter emissions regulations, incentives for green technologies, and international agreements aimed at reducing greenhouse gas emissions."),
                          tags$p("3. The examination of annual average land temperatures provided clear evidence of the increasing frequency and severity of extreme weather events. This information is valuable for infrastructure designers. It emphasizes the need for creating sustainable and resilient infrastructure that can withstand such conditions. Incorporating climate resilience into urban planning and development will be critical for ensuring the long-term sustainability of cities."),
