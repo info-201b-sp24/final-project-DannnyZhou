@@ -17,7 +17,7 @@ For the Final Project -- Data Wrangling, add the following to this code reposito
 * Data Nutrition Label (pdf) 
 
 
-**Link: Link to your Shiny App here**
+**Link to Shiny App**
 https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv
 
 # Introduction
