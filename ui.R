@@ -80,7 +80,7 @@ ui <- dashboardPage(
                   mainPanel(
                     plotlyOutput("dotPlot")
                   )
-                )#tabsetPanel
+                )
               )),
       tabItem(tabName = "chart3",
               fluidPage(

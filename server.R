@@ -45,13 +45,10 @@ server <- function(input, output) {
     arrange(Decade)%>%
     mutate(Decade = as.factor(Decade))
   
-  # Generate the dot plot based on the slider input
-  
   output$dotPlot <- renderPlotly({
     # Depending on the selected aggregation method, use the corresponding function
     agg_func <- if (input$aggregationMethod == "sum") sum else mean
     
-    # Prepare the data based on user selections
     filtered_data <- data %>%
       mutate(Decade = floor(Year / 10) * 10) %>%
       group_by(Decade) %>%
@@ -59,7 +56,6 @@ server <- function(input, output) {
       filter(Decade >= input$decadeRange[1] & Decade <= input$decadeRange[2]) %>%
       arrange(Decade)
     
-    # Generate the dot plot using Plotly
     plot_ly(data = filtered_data, x = ~Decade, y = ~Total_Anomaly,
             type = 'scatter', mode = 'markers+lines',
             marker = list(size = 10, color = 'blue')) %>%
@@ -68,7 +64,8 @@ server <- function(input, output) {
              yaxis = list(title = "Total Anomaly"),
              hovermode = 'closest')
   })
-  
+
+#chart3
   url3 <- "https://query.data.world/s/6ueb4ogcgvjidmvr6e7vo4gth4zsa2?dws=00000"
   data3 <- read.csv(url3, header=TRUE, stringsAsFactors=FALSE)
   data3$dt <- as.Date(data3$dt, format = "%Y-%m-%d")
@@ -76,7 +73,7 @@ server <- function(input, output) {
     group_by(Year = format(dt, "%Y")) %>%
     summarise(AnnualAvgTemp = mean(LandAverageTemperature, na.rm = TRUE))
   
-  # Chart 3: Annual Average Land Temperature
+  #Chart 3: Annual Average Land Temperature
   output$avgTempPlot <- renderPlotly({
     filtered_data3 <- annual_data %>%
       filter(as.numeric(Year) >= input$yearRange3[1] & as.numeric(Year) <= input$yearRange3[2])
