@@ -25,7 +25,7 @@ Climate change is a global crisis that influences virtually every aspect of the 
 
 The importance of these questions is underscored by the increasing frequency and severity of extreme weather events, which have profound implications for ecosystems, human health, agriculture, and economies worldwide. Recent reports of extraordinary weather events, such as unprecedented heavy rainfall, massive hail storms, inland tornadoes, and the sky that turns dark prematurely, highlight the urgent need to understand and mitigate climate change. Such extreme events disrupt lives and infrastructures, necessitating a robust analysis to aid in preparation and adaptation strategies.
 
-Main Questions:
+# Main Questions:
 <br> How have global temperature anomalies evolved over the years, and what does this suggest about the pace and scale of global warming?"
 
 
