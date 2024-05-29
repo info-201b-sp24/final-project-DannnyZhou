@@ -10,13 +10,6 @@ Hai Guo: hguo5\@uw.edu
 
 Vivian Wu: viviaw\@uw.edu
 
-For the Final Project -- Data Wrangling, add the following to this code repository:
-
-* An R script file containing the code you used to create your unified dataset 
-* Your unified and cleaned CSV dataset file
-* Data Nutrition Label (pdf) 
-
-
 **Link to Shiny App**
 http://127.0.0.1:6932/
 
