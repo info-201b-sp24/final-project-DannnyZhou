@@ -68,7 +68,28 @@ server <- function(input, output) {
              yaxis = list(title = "Total Anomaly"),
              hovermode = 'closest')
   })
-
+  
+  url3 <- "https://query.data.world/s/6ueb4ogcgvjidmvr6e7vo4gth4zsa2?dws=00000"
+  data3 <- read.csv(url3, header=TRUE, stringsAsFactors=FALSE)
+  data3$dt <- as.Date(data3$dt, format = "%Y-%m-%d")
+  annual_data <- data3 %>%
+    group_by(Year = format(dt, "%Y")) %>%
+    summarise(AnnualAvgTemp = mean(LandAverageTemperature, na.rm = TRUE))
+  
+  # Chart 3: Annual Average Land Temperature
+  output$avgTempPlot <- renderPlotly({
+    filtered_data3 <- annual_data %>%
+      filter(as.numeric(Year) >= input$yearRange3[1] & as.numeric(Year) <= input$yearRange3[2])
+    
+    plot3 <- ggplot(filtered_data3, aes(x = as.numeric(Year), y = AnnualAvgTemp)) +
+      geom_line(color = "blue") +
+      labs(title = "Annual Average Land Temperature",
+           x = "Year",
+           y = "Temperature (°C)") +
+      theme_minimal()
+    
+    ggplotly(plot3)
+  })
 }
 
 
